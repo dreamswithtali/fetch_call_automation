@@ -1,4 +1,6 @@
 {
+  "type": "module",
+  "name": "your-package-name",
   "name": "fetchcallautomation",
   "version": "1.0.0",
   "description": "",
@@ -9,6 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "axios": "^1.6.3",
+    "fetch-retry": "^5.0.6",
+    "node-fetch": "^2.6.1",
+    "readline-promise": "^1.0.5"
   }
 }
