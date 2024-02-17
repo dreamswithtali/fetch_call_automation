@@ -1,8 +1,4 @@
-express-project/
-├── public/
-│   └── logviewer.html
-├── server.js
-└── requests.log
+
 
 
 1. Start the server by running node server.js in your terminal.
