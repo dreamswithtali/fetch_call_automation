@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log Viewer</title>
+<style>
+  body { display: flex; }
+  #toc { width: 20%; overflow-y: auto; border-right: 1px solid #ccc; }
+  #detail { width: 80%; overflow-y: auto; }
+  .entry { cursor: pointer; padding: 10px; border-bottom: 1px solid #eee; }
+  .entry:hover { background-color: #f0f0f0; }
+</style>
+</head>
+<body>
+<div id="toc"></div>
+<div id="detail"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('/logs')
+    .then(response => response.text())
+    .then(text => {
+      const lines = text.trim().split('\n\n');
+      const toc = document.getElementById('toc');
+      const detail = document.getElementById('detail');
+      
+      lines.forEach((line, index) => {
+        const entry = document.createElement('div');
+        entry.className = 'entry';
+        entry.textContent = `Request ${index + 1}`;
+        entry.onclick = () => {
+          detail.textContent = line;
+        };
+        toc.appendChild(entry);
+      });
+    })
+    .catch(err => console.error('Failed to fetch logs', err));
+});
+</script>
+</body>
+</html>

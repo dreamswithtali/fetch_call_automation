@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Details</title>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Function to fetch request details and update the page
+  function fetchRequestDetails() {
+    fetch('/requests')
+      .then(response => response.json())
+      .then(data => {
+        const detailsContainer = document.getElementById('details');
+        detailsContainer.innerHTML = ''; // Clear current details
+        data.forEach(detail => {
+          const detailElement = document.createElement('pre');
+          detailElement.textContent = JSON.stringify(detail, null, 2);
+          detailsContainer.appendChild(detailElement);
+        });
+      })
+      .catch(error => console.error('Error fetching request details:', error));
+  }
+
+  // Fetch request details on page load
+  fetchRequestDetails();
+
+  // Optionally, set up a refresh mechanism
+  document.getElementById('refresh').addEventListener('click', fetchRequestDetails);
+});
+</script>
+</head>
+<body>
+<h1>Request Details</h1>
+<button id="refresh">Refresh</button>
+<div id="details"></div>
+</body>
+</html>
